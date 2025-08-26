@@ -63,6 +63,7 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
         <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="reset-password" element={<ForgotPassword />} />
         <Route
           path="/admin"
           element={
