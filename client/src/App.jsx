@@ -22,6 +22,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -61,6 +62,7 @@ function App() {
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
         </Route>
+        <Route path="forgot-password" element={<ForgotPassword />} />
         <Route
           path="/admin"
           element={

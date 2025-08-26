@@ -5,12 +5,15 @@ const {
   logoutUser,
   authMiddleware,
 } = require("../../controllers/auth/auth-controller");
+const { resetPassword, resetPasswordConfirm } = require("../../controllers/auth/passwordReset");
 
 const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+router.post('/reset_password',resetPassword);
+router.post('/reset_password_confirm/:token',resetPasswordConfirm);
 router.get("/check-auth", authMiddleware, (req, res) => {
   const user = req.user;
   res.status(200).json({

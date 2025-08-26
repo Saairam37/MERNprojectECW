@@ -9,6 +9,7 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 function CommonForm({
   formControls,
@@ -109,6 +110,7 @@ function CommonForm({
   }
 
   return (
+    <>
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
@@ -122,6 +124,9 @@ function CommonForm({
         {buttonText || "Submit"}
       </Button>
     </form>
+    <Link to="/forgot-password" className="text-sm text-primary hover:underline mt-2" ><Label>Forgot Password?</Label></Link>
+    </>
+
   );
 }
 
