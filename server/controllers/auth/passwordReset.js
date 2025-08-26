@@ -1,11 +1,7 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET, EMAIL, EMAIL_PASS } = require('../utils/config');
+const User = require("../../models/User");
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const cookie = require('cookie');
-
+const bcrypt = require('bcryptjs');
 const passwordControllers = {
     resetPassword: async (req, res) => {
         try {
@@ -31,14 +27,14 @@ const passwordControllers = {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: EMAIL,
-                    pass: EMAIL_PASS
+                    user: process.env.EMAIL,
+                    pass: process.env.EMAIL_PASS
                 }
             })
 
 
             await transporter.sendMail({
-                from: EMAIL,
+                from: process.env.EMAIL,
                 to: email,
                 subject: 'Reset your password',
                 html: `<p>Click the link below to reset your password:</p>
