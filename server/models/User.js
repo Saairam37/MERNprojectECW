@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  wishlist: [mongoose.Schema.Types.ObjectId],
   resetToken: String,
   resetTokenExpiration: Date,
 });

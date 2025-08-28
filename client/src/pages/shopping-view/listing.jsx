@@ -16,6 +16,7 @@ import {
   fetchAllFilteredProducts,
   fetchProductDetails,
 } from "@/store/shop/products-slice";
+import { addToWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +55,32 @@ function ShoppingListing() {
 
   function handleSort(value) {
     setSort(value);
+  }
+
+  function addToWishlist(productId){
+    dispatch(addToWishlistAsync({
+      userId: user?.id,
+      productId: productId,
+    })).then((data) => {
+      if (data.payload.success) {
+        toast({
+          title: "Product added to wishlist",
+        });
+      }
+    });
+  }
+
+  function removeFromWishlist(productId){
+    dispatch(removeFromWishlistAsync({
+      userId: user?.id,
+      productId: productId,
+    })).then((data) => {
+      if (data.payload.success) {
+        toast({
+          title: "Product removed from wishlist",
+        });
+      }
+    });
   }
 
   function handleFilter(getSectionId, getCurrentOption) {
@@ -188,6 +215,9 @@ function ShoppingListing() {
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}
+                  addToWishlist={addToWishlist}
+                  removeFromWishlist={removeFromWishlist}
+                  wishList={user?.wishlist}
                 />
               ))
             : null}

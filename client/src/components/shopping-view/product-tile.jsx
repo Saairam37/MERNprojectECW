@@ -7,6 +7,9 @@ function ShoppingProductTile({
   product,
   handleGetProductDetails,
   handleAddtoCart,
+  addToWishlist,
+  removeFromWishlist,
+  wishList
 }) {
   return (
     <Card className="w-full max-w-sm mx-auto">
@@ -15,7 +18,7 @@ function ShoppingProductTile({
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[300px] object-cover rounded-t-lg"
+            className="w-fit justify-self-center h-[300px] object-cover rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
@@ -70,6 +73,25 @@ function ShoppingProductTile({
             Add to cart
           </Button>
         )}
+        {
+          (wishList?.find((item) => item === product?._id))? (
+            <Button
+              variant="outline"
+              className="w-full mt-2"
+              onClick={() => removeFromWishlist(product?._id)}
+            >
+              Remove from Wishlist
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              className="w-full mt-2"
+              onClick={() => addToWishlist(product?._id)}
+            >
+              Add to Wishlist
+            </Button>
+          )
+        }
       </CardFooter>
     </Card>
   );

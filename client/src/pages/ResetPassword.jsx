@@ -36,7 +36,7 @@ const ResetPassword = () => {
         console.log("Reset token:", token);
 
         try {
-            const response = await fetch(`https://mernprojectecw.onrender.com/auth/reset_password_confirm/${token}`, {
+            const response = await fetch(`https://mernprojectecw.onrender.com/api/auth/reset_password_confirm/${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

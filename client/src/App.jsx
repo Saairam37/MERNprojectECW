@@ -23,6 +23,7 @@ import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -63,7 +64,7 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
         <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="reset-password" element={<ForgotPassword />} />
+        <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route
           path="/admin"
           element={
