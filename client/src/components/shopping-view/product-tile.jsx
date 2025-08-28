@@ -2,15 +2,42 @@ import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
+import { addToWishlistAsync } from "@/store/shop/wish-slice";
+import { useToast } from "../ui/use-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 function ShoppingProductTile({
   product,
   handleGetProductDetails,
   handleAddtoCart,
-  addToWishlist,
   removeFromWishlist,
   wishList
-}) {
+}) 
+
+{
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+    const { toast } = useToast();
+
+function addToWishlist(){
+        try{dispatch(addToWishlistAsync(
+          
+            user?.id,
+            product._id
+          
+        )).then((data) => {
+          if (data.payload.success) {
+            toast({
+              title: "Product added to wishlist",
+            });
+          }
+        });}
+        catch(err){
+          console.log(err);
+        }
+        console.log(product._id, "productId to wishlist");
+      }
+
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div onClick={() => handleGetProductDetails(product?._id)}>
@@ -86,7 +113,7 @@ function ShoppingProductTile({
             <Button
               variant="outline"
               className="w-full mt-2"
-              onClick={() => addToWishlist(product?._id)}
+              onClick={() => addToWishlist()}
             >
               Add to Wishlist
             </Button>

@@ -30,6 +30,7 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
+import { addToWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -75,6 +76,21 @@ function ShoppingHome() {
   function handleGetProductDetails(getCurrentProductId) {
     dispatch(fetchProductDetails(getCurrentProductId));
   }
+
+  
+  
+    function removeFromWishlist(productId){
+      dispatch(removeFromWishlistAsync({
+        userId: user?.id,
+        productId: productId,
+      })).then((data) => {
+        if (data.payload.success) {
+          toast({
+            title: "Product removed from wishlist",
+          });
+        }
+      });
+    }
 
   function handleAddtoCart(getCurrentProductId) {
     dispatch(
@@ -177,6 +193,8 @@ function ShoppingHome() {
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
                     handleAddtoCart={handleAddtoCart}
+                  removeFromWishlist={removeFromWishlist}
+                  wishList={user?.wishlist}
                   />
                 ))
               : null}

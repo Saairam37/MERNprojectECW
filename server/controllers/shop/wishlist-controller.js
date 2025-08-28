@@ -2,7 +2,7 @@ const User = require("../../models/User");
 
 const addToWishlist = async () => {
   try {
-    const { userId, productId } = req.params;
+    const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
       return { success: false, message: "User not found!" };
@@ -24,7 +24,7 @@ const addToWishlist = async () => {
 
 const removeFromWishlist = async () => {
   try {
-    const { userId, productId } = req.params;
+    const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
       return { success: false, message: "User not found!" };

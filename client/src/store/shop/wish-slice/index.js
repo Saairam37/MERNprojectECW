@@ -4,29 +4,29 @@ import axios from "axios";
 
 export const addToWishlistAsync = createAsyncThunk(
   "wishlist/add",
-  async ({ userId, product }, { rejectWithValue }) => {
+  async (userId, productID) => {
     try {
       const response = await axios.post(
-        "https://mernprojectecw.onrender.com/api/cart/wishlist/" + userId + "/" + product,
-        { userId, product }
+        "https://mernprojectecw.onrender.com/api/cart/wishlist/",
+        { userId, productID }
       );
       return response.data; // adjust based on your API response
     } catch (err) {
-      return rejectWithValue(err.response?.data || err.message);
+      return err.response?.data || err.message;
     }
   }
 );
 
 export const fetchWishlistAsync = createAsyncThunk(
   "wishlist/fetch",
-  async (userId, { rejectWithValue }) => {
+  async (userId) => {
     try {
       const response = await axios.get(
         `https://mernprojectecw.onrender.com/api/cart/wishlist/${userId}`
       );
       return response.data;
     } catch (err) {
-      return rejectWithValue(err.response?.data || err.message);
+      return err.response?.data || err.message
     }
   }
 );
@@ -36,7 +36,8 @@ export const removeFromWishlistAsync = createAsyncThunk(
   async ({ userId, productId }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `https://mernprojectecw.onrender.com/api/wishlist/${userId}/${productId}`
+        `https://mernprojectecw.onrender.com/api/wishlist/`,
+        { userId, productId } // pass data in the request body
       );
       return response.data;
     } catch (err) {

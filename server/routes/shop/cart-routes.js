@@ -14,8 +14,8 @@ router.post("/add", addToCart);
 router.get("/get/:userId", fetchCartItems);
 router.put("/update-cart", updateCartItemQty);
 router.delete("/:userId/:productId", deleteCartItem);
-router.delete("/wishlist/:userId/:productId", removeFromWishlist);
-router.post("/wishlist/:userId/:productId", addToWishlist);
+router.delete("/wishlist/", removeFromWishlist);
+router.post("/wishlist/", addToWishlist);
 router.get("/wishlist/:userId", fetchWishlist);           
 
 module.exports = router;

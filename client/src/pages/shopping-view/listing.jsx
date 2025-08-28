@@ -58,7 +58,7 @@ function ShoppingListing() {
   }
 
   function addToWishlist(productId){
-    dispatch(addToWishlistAsync({
+    /*dispatch(addToWishlistAsync({
       userId: user?.id,
       productId: productId,
     })).then((data) => {
@@ -67,7 +67,8 @@ function ShoppingListing() {
           title: "Product added to wishlist",
         });
       }
-    });
+    });*/
+    console.log(productId, "productId");
   }
 
   function removeFromWishlist(productId){
@@ -212,6 +213,7 @@ function ShoppingListing() {
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
+                key={productItem._id}
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}
