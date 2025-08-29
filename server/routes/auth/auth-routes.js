@@ -6,6 +6,7 @@ const {
   authMiddleware,
 } = require("../../controllers/auth/auth-controller");
 const { resetPassword, resetPasswordConfirm } = require("../../controllers/auth/passwordReset");
+const User = require("../../models/User");
 
 const router = express.Router();
 
@@ -14,10 +15,11 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.post('/reset_password',resetPassword);
 router.post('/reset_password_confirm/:token',resetPasswordConfirm);
-router.put('/profile-update',authMiddleware,async (req,res)=>{
+router.put('/profile-update',async (req,res)=>{
   try{
-    const user = req.user;
-    const {userName, email} = req.body;
+        const {userId, userName, email} = req.body;
+    const user = await User.findById(userId);
+    if(!user) return res.status(400).json({message:'User not found'});
     if(userName) user.userName = userName;
     if(email) user.email = email;
     await user.save();

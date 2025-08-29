@@ -31,6 +31,7 @@ function ShoppingAccount() {
 
   const handleUpdate = async() => {
     await axios.put('https://mernprojectecw.onrender.com/api/auth/profile-update', {
+      userId: user?.id,
       userName: name,
       email: email
     }).then(response => {
