@@ -20,7 +20,8 @@ function ShoppingProductTile({
     const { toast } = useToast();
 
 function addToWishlist(){
-        try{dispatch(addToWishlistAsync(
+        try{
+          dispatch(addToWishlistAsync(
           
             user?.id,
             product._id

@@ -7,8 +7,11 @@ export const addToWishlistAsync = createAsyncThunk(
   async (userId, productID) => {
     try {
       const response = await axios.post(
-        "https://mernprojectecw.onrender.com/api/cart/wishlist/",
-        { userId, productID }
+        "https://mernprojectecw.onrender.com/api/shop/cart/wishlist",
+        { 
+            userId,
+            productID,
+        }
       );
       return response.data; // adjust based on your API response
     } catch (err) {
@@ -22,7 +25,7 @@ export const fetchWishlistAsync = createAsyncThunk(
   async (userId) => {
     try {
       const response = await axios.get(
-        `https://mernprojectecw.onrender.com/api/cart/wishlist/${userId}`
+        `https://mernprojectecw.onrender.com/api/shop/cart/wishlist/${userId}`
       );
       return response.data;
     } catch (err) {
@@ -36,7 +39,7 @@ export const removeFromWishlistAsync = createAsyncThunk(
   async ({ userId, productId }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `https://mernprojectecw.onrender.com/api/wishlist/`,
+        `https://mernprojectecw.onrender.com/api/shop/cart/wishlist/`,
         { userId, productId } // pass data in the request body
       );
       return response.data;
