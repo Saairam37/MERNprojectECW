@@ -1,6 +1,6 @@
 const User = require("../../models/User");
 
-const addToWishlist = async () => {
+const   addToWishlist = async () => {
   try {
     const { userId, productId } = req.body;
     const user = await User.findById(userId);

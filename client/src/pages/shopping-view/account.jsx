@@ -1,10 +1,16 @@
+"use client";
+
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+
 import {
   Dialog,
   DialogTrigger,
@@ -14,33 +20,51 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+
 import accImg from "../../assets/account.jpg";
 import Address from "@/components/shopping-view/address";
 import ShoppingOrders from "@/components/shopping-view/orders";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useSelector } from "react-redux";
-import axios from "axios";
 
-
-function ShoppingAccount() {
+export default function ShoppingAccount() {
   const { user } = useSelector((state) => state.auth);
+  const { toast } = useToast(); // Use the toast function
 
+  const [open, setOpen] = useState(false);
   const [name, setName] = useState(user?.userName || "");
   const [email, setEmail] = useState(user?.email || "");
 
-  const handleUpdate = async() => {
-    await axios.put('https://mernprojectecw.onrender.com/api/auth/profile-update', {
-      userId: user?.id,
-      userName: name,
-      email: email
-    }).then(response => {
-      console.log('Profile updated successfully:', response.data);
-    }).catch(error => {
-      console.error('Error updating profile:', error);
-    });
-    console.log("Updated name:", name);
-    console.log("Updated email:", email);
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(
+        "https://mernprojectecw.onrender.com/api/auth/profile-update",
+        {
+          userId: user?.id,
+          userName: name,
+          email: email,
+        }
+      );
+      console.log("Profile updated:", response.data);
+
+      setOpen(false); // Close the dialog
+
+      toast({
+        title: "Profile updated!",
+        description: "Your profile information was updated successfully.",
+        variant: "default", // or leave out for default style
+      });
+    } catch (error) {
+      console.error("Error updating profile:", error);
+
+      toast({
+        title: "Update failed",
+        description: "There was a problem updating your profile.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -48,12 +72,13 @@ function ShoppingAccount() {
       <div className="relative h-[300px] w-full overflow-hidden">
         <img
           src={accImg}
+          alt="Account banner"
           className="h-full w-full object-cover object-center"
         />
       </div>
 
       <div className="container mx-auto flex justify-end py-4">
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button variant="outline">Edit Profile</Button>
           </DialogTrigger>
@@ -103,5 +128,3 @@ function ShoppingAccount() {
     </div>
   );
 }
-
-export default ShoppingAccount;

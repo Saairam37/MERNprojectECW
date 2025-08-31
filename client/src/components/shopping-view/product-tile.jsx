@@ -13,19 +13,19 @@ function ShoppingProductTile({
   removeFromWishlist,
   wishList
 }) 
-
 {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     const { toast } = useToast();
 
 function addToWishlist(){
+        console.log(product._id, "productId to wishlist");
         try{
           dispatch(addToWishlistAsync(
-          
-            user?.id,
-            product._id
-          
+          {
+            userId: user?.id,
+            productId: product._id
+          }
         )).then((data) => {
           if (data.payload.success) {
             toast({
