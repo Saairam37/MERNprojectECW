@@ -1,3 +1,4 @@
+const Product = require("../../models/Product");
 const User = require("../../models/User");
 
 const   addToWishlist = async (req, res) => {
@@ -8,8 +9,12 @@ const   addToWishlist = async (req, res) => {
     if (!user) {
       res.status(404).json({ success: false, message: "User not found!" });
     }
+    const product = await Product.findById(productId);
+    if (!product) {
+      res.status(404).json({ success: false, message: "Product not found!" });
+    }
 
-    if (user.wishlist.includes(productId)) {
+    if (user.wishlist.includes(product._id)) {
       res.status(400).json({ success: false, message: "Product already in wishlist!" });
     }
 
