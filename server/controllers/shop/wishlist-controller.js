@@ -1,8 +1,8 @@
 const User = require("../../models/User");
 
-const   addToWishlist = async () => {
+const   addToWishlist = async (req, res) => {
   try {
-    console.log('addToWishlist called');
+    console.log('addToWishlist called', req, req.body);
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
