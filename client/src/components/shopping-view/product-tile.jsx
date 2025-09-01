@@ -27,14 +27,18 @@ function addToWishlist(){
             productId: product._id
           }
         )).then((data) => {
-          if (data.payload.success) {
+          if (data.success) {
             toast({
               title: "Product added to wishlist",
             });
           }
         });}
         catch(err){
-          console.log(err);
+          toast({
+            title: "Error adding to wishlist",
+            description: data.message || "An error occurred.",
+            variant: "destructive",
+          });
         }
         console.log(product._id, "productId to wishlist");
       }

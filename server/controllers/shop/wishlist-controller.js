@@ -7,15 +7,15 @@ const   addToWishlist = async (req, res) => {
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
-      res.status(404).json({ success: false, message: "User not found!" });
+      return res.status(404).json({ success: false, message: "User not found!" });
     }
     const product = await Product.findById(productId);
     if (!product) {
-      res.status(404).json({ success: false, message: "Product not found!" });
+      return res.status(404).json({ success: false, message: "Product not found!" });
     }
 
     if (user.wishlist.includes(product._id)) {
-      res.status(400).json({ success: false, message: "Product already in wishlist!" });
+      return res.status(400).json({ success: false, message: "Product already in wishlist!" });
     }
 
     user.wishlist.push(productId);
