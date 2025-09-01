@@ -23,6 +23,8 @@ import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
+import { use } from "react";
+import { fetchWishlistAsync } from "@/store/shop/wish-slice";
 
 function MenuItems() {
   const navigate = useNavigate();
@@ -67,6 +69,7 @@ function MenuItems() {
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
+  const { items } = useSelector((state) => state.shopWishlist);
   const [openCartSheet, setOpenCartSheet] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -81,6 +84,12 @@ function HeaderRightContent() {
   useEffect(() => {
     dispatch(fetchCartItems(user?.id));
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchWishlistAsync(user?.id));
+  }, [dispatch]);
+
+  console.log(items, "wishlist");
 
   console.log(cartItems, "cartItems");
 

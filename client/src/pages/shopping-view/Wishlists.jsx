@@ -53,6 +53,8 @@ function Wishlists() {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
+  const { items } = useSelector((state) => state.shopWishlist);
+  console.log(items, "wishList");
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);

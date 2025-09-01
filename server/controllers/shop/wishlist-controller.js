@@ -53,7 +53,7 @@ const removeFromWishlist = async (req, res) => {
 const fetchWishlist = async (req, res) => {
   try {
     const { userId } = req.params;
-    const user = await User.findById(userId).populate('wishlist');
+    const user = await User.findById(userId);
     if (!user) {
       res.status(404).json({ success: false, message: "User not found!" });
   }
