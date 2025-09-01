@@ -86,6 +86,7 @@ function HeaderRightContent() {
 
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
+      <button onClick={() => navigate("/shop/wishlist")}>Wishlists</button>
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
         <Button
           onClick={() => setOpenCartSheet(true)}

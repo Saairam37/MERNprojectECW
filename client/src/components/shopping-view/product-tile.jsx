@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { addToWishlistAsync } from "@/store/shop/wish-slice";
 import { useToast } from "../ui/use-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { data } from "autoprefixer";
 
 function ShoppingProductTile({
   product,
@@ -27,20 +28,27 @@ function addToWishlist(){
             productId: product._id
           }
         )).then((data) => {
-          if (data.success) {
+          
+          if (data?.payload?.success) {
             toast({
-              title: "Product added to wishlist",
+              title: data?.payload?.message,
+            });
+          } else {
+            toast({
+              title: data?.payload?.error || "Already in wishlist",
+              variant: "destructive",
             });
           }
+          
+          console.log(product._id, "productId to wishlist");
         });}
         catch(err){
           toast({
-            title: "Error adding to wishlist",
-            description: data.message || "An error occurred.",
-            variant: "destructive",
+            title: data?.payload?.message || "Error",
           });
         }
-        console.log(product._id, "productId to wishlist");
+        console.log(product._id, "productId not added to wishlist");
+        
       }
 
   return (

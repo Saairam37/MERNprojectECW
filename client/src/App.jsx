@@ -24,6 +24,7 @@ import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Wishlists from "./pages/shopping-view/Wishlists";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -36,7 +37,7 @@ function App() {
     dispatch(checkAuth(token));
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  if (isLoading) return <Skeleton className="w-screen bg-black max-h-screen" />;
 
   console.log(isLoading, user);
 
@@ -88,6 +89,7 @@ function App() {
         >
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
+          <Route path="wishlist" element={<Wishlists />} />
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
