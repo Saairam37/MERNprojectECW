@@ -47,7 +47,7 @@ export const removeFromWishlistAsync = createAsyncThunk(
     async (xxx) => {
         console.log(xxx, "req in removing wishlist");
         try {
-            const response = await axios.delete(
+            const response = await axios.put(
                 `https://mernprojectecw.onrender.com/api/shop/cart/wishlist/remove`,
                 xxx,
                 {
