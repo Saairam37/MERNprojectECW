@@ -3,19 +3,18 @@ const User = require("../../models/User");
 
 const   addToWishlist = async (req, res) => {
   try {
-    console.log('addToWishlist called', req, req.body);
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ success: false, message: "User not found!" });
+      res.status(404).json({ success: false, message: "User not found!" });
     }
     const product = await Product.findById(productId);
     if (!product) {
-      return res.status(404).json({ success: false, message: "Product not found!" });
+      res.status(404).json({ success: false, message: "Product not found!" });
     }
 
     if (user.wishlist.includes(product._id)) {
-      return res.status(400).json({ success: false, message: "Product already in wishlist!" });
+      res.status(400).json({ success: false, message: "Product already in wishlist!" });
     }
 
     user.wishlist.push(productId);
