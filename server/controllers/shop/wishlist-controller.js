@@ -22,41 +22,41 @@ const   addToWishlist = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
 }}
 
-const removeFromWishlist = async () => {
+const removeFromWishlist = async (req, res) => {
   try {
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
-      return { success: false, message: "User not found!" };
+      res.status(404).json({ success: false, message: "User not found!" });
     }
 
     const index = user.wishlist.indexOf(productId);
     if (index === -1) {
-      return { success: false, message: "Product not in wishlist!" };
+      res.status(400).json({ success: false, message: "Product not in wishlist!" });
     }
 
     user.wishlist.splice(index, 1);
     await user.save();
 
-    return { success: true, message: "Product removed from wishlist!" };
+    res.status(200).json({ success: true, message: "Product removed from wishlist!" });
   } catch (error) {
     console.error("Error removing from wishlist:", error);
-    return { success: false, message: "Server error" };
+    res.status(500).json({ success: false, message: "Server error" });
   }
 }
 
-const fetchWishlist = async () => {
+const fetchWishlist = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId).populate('wishlist');
     if (!user) {
-      return { success: false, message: "User not found!" };
-    }
+      res.status(404).json({ success: false, message: "User not found!" });
+  }
 
-    return { success: true, items: user.wishlist };
+    res.status(200).json({ success: true, wishlist: user.wishlist });
   } catch (error) {
     console.error("Error fetching wishlist:", error);
-    return { success: false, message: "Server error" };
+    res.status(500).json({ success: false, message: "Server error" });  
   }
 }
 

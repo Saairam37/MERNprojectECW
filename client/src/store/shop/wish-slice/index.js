@@ -8,12 +8,13 @@ export const addToWishlistAsync = createAsyncThunk(
         try {
             console.log(xxx, "req in wishlist");
             const response = await axios.post(
-                "https://mernprojectecw.onrender.com/api/shop/cart/wishlist",
+                "https://mernprojectecw.onrender.com/api/shop/cart/wishlist/add",
                 xxx,
                 {
                     headers: {
                         "Content-Type": "application/json",
                     },
+                    
                 }
             );
             return await response.data;
@@ -47,7 +48,7 @@ export const removeFromWishlistAsync = createAsyncThunk(
         try {
             const response = await axios.delete(
                 `https://mernprojectecw.onrender.com/api/shop/cart/wishlist/`,
-                { userId, productId } // pass data in the request body
+                { userId, productId } 
             );
             return response.data;
         } catch (err) {
