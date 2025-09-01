@@ -40,13 +40,13 @@ function addToWishlist(){
       }
 
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="w-full flex flex-col justify-between max-w-sm mx-auto">
       <div onClick={() => handleGetProductDetails(product?._id)}>
-        <div className="relative">
+        <div className="relative p-5 w-full aspect-square overflow-hidden">
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-fit justify-self-center h-[300px] object-cover rounded-t-lg"
+            className="w-full h-full object-contain rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
@@ -89,7 +89,8 @@ function addToWishlist(){
         </CardContent>
       </div>
       <CardFooter>
-        {product?.totalStock === 0 ? (
+        <div className="w-full flex flex-col gap-2">
+          {product?.totalStock === 0 ? (
           <Button className="w-full opacity-60 cursor-not-allowed">
             Out Of Stock
           </Button>
@@ -102,7 +103,7 @@ function addToWishlist(){
           </Button>
         )}
         {
-          (wishList?.find((item) => item === product?._id))? (
+          (wishList?.find((item) => item._id === product?._id))? (
             <Button
               variant="outline"
               className="w-full mt-2"
@@ -120,6 +121,7 @@ function addToWishlist(){
             </Button>
           )
         }
+        </div>
       </CardFooter>
     </Card>
   );

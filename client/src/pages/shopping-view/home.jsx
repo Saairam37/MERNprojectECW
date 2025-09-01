@@ -193,8 +193,8 @@ function ShoppingHome() {
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
                     handleAddtoCart={handleAddtoCart}
-                  removeFromWishlist={removeFromWishlist}
-                  wishList={user?.wishlist}
+                    removeFromWishlist={removeFromWishlist}
+                    wishList={user?.wishlist}
                   />
                 ))
               : null}

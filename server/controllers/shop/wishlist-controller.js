@@ -5,22 +5,21 @@ const   addToWishlist = async () => {
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
     if (!user) {
-      return { success: false, message: "User not found!" };
+      res.status(404).json({ success: false, message: "User not found!" });
     }
 
     if (user.wishlist.includes(productId)) {
-      return { success: false, message: "Product already in wishlist!" };
+      res.status(400).json({ success: false, message: "Product already in wishlist!" });
     }
 
     user.wishlist.push(productId);
     await user.save();
 
-    return { success: true, message: "Product added to wishlist!" };
+    res.status(200).json({ success: true, message: "Product added to wishlist!" });
   } catch (error) {
     console.error("Error adding to wishlist:", error);
-    return { success: false, message: "Server error" };
-  }
-}
+    res.status(500).json({ success: false, message: "Server error" });
+}}
 
 const removeFromWishlist = async () => {
   try {

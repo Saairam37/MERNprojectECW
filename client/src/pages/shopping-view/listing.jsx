@@ -217,7 +217,6 @@ function ShoppingListing() {
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}
-                  addToWishlist={addToWishlist}
                   removeFromWishlist={removeFromWishlist}
                   wishList={user?.wishlist}
                 />

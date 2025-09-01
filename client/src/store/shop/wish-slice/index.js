@@ -4,21 +4,19 @@ import axios from "axios";
 
 export const addToWishlistAsync = createAsyncThunk(
     "/wishlist/add",
-    async (req) => {
+    async (xxx) => {
         try {
-            console.log(req, "req in wishlist");
+            console.log(xxx, "req in wishlist");
             const response = await axios.post(
                 "https://mernprojectecw.onrender.com/api/shop/cart/wishlist",
-                {
-                    ...req
-                },
+                xxx,
                 {
                     headers: {
                         "Content-Type": "application/json",
                     },
                 }
             );
-            return response.data;
+            return await response.data;
         } catch (err) {
             console.log(err, "err in wishlist");
             if (err.response?.data?.message) {

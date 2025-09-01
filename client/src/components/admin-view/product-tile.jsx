@@ -9,13 +9,13 @@ function AdminProductTile({
   handleDelete,
 }) {
   return (
-    <Card className="w-full max-w-sm mx-auto">
-      <div>
-        <div className="relative">
+    <Card className="w-full max-w-sm mx-auto shadow-md hover:shadow-2xl transition-shadow">
+      <div className="w-full flex flex-col justify-between h-full">
+        <div className="p-4 relative w-full aspect-square overflow-hidden">
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[300px] object-cover rounded-t-lg"
+            className="w-full h-full object-contain rounded-t-lg"
           />
         </div>
         <CardContent>
@@ -33,7 +33,7 @@ function AdminProductTile({
             ) : null}
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
+        <CardFooter className=" flex justify-between items-center">
           <Button
             onClick={() => {
               setOpenCreateProductsDialog(true);

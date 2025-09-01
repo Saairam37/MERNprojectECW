@@ -30,7 +30,7 @@ function AdminDashboard() {
   console.log(featureImageList, "featureImageList");
 
   return (
-    <div>
+    /*<div>
       <ProductImageUpload
         imageFile={imageFile}
         setImageFile={setImageFile}
@@ -56,7 +56,8 @@ function AdminDashboard() {
             ))
           : null}
       </div>
-    </div>
+    </div>*/
+    <div>Welcome to the Admin panel!!</div>
   );
 }
 

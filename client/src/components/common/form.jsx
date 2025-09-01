@@ -124,7 +124,6 @@ function CommonForm({
         {buttonText || "Submit"}
       </Button>
     </form>
-    <Link to="/forgot-password" className="text-sm text-primary hover:underline mt-2" ><Label>Forgot Password?</Label></Link>
     </>
 
   );
