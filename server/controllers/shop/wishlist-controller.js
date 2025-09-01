@@ -31,11 +31,12 @@ const removeFromWishlist = async (req, res) => {
   try {
     const { userId, productId } = req.body;
     const user = await User.findById(userId);
+    const product = await Product.findById(productId);
     if (!user) {
-      res.status(404).json({ success: false, message: "User not found!" });
+      res.status(404).json({ success: false, message: "User not found!", userId, productId });
     }
 
-    const index = user.wishlist.indexOf(productId);
+    const index = user.wishlist.indexOf(product._id);
     if (index === -1) {
       res.status(400).json({ success: false, message: "Product not in wishlist!" });
     }

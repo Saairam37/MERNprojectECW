@@ -17,6 +17,7 @@ import {
   WashingMachine,
   WatchIcon,
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,7 +30,7 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
-import { addToWishlistAsync, fetchWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
+import { addToWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -79,13 +80,20 @@ function Wishlists() {
   
   
     function removeFromWishlist(productId){
+        console.log(productId, "productId");
+        console.log(user.id, "userId");
       dispatch(removeFromWishlistAsync({
-        userId: user?.id,
-        productId: productId,
+        userId: user.id,
+        productId: productId
       })).then((data) => {
         if (data.payload.success) {
           toast({
             title: "Product removed from wishlist",
+          });
+        }else{
+          toast({
+            title: data.payload.message || "Error",
+            variant: "destructive",
           });
         }
       });
@@ -107,7 +115,6 @@ function Wishlists() {
       }
     });
   }
- 
 
   useEffect(() => {
     if (productDetails !== null) setOpenDetailsDialog(true);
@@ -121,7 +128,14 @@ function Wishlists() {
     return () => clearInterval(timer);
   }, [featureImageList]);
 
-  
+  useEffect(() => {
+    dispatch(
+      fetchAllFilteredProducts({
+        filterParams: {},
+        sortParams: "price-lowtohigh",
+      })
+    );
+  }, [dispatch]);
 
   console.log(productList, "productList");
 
@@ -139,21 +153,31 @@ function Wishlists() {
             Wishlist Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {productList && productList.length > 0
-              ? productList.map((productItem) => (
-                    user.wishlist?.items
-                        .map((wish) => wish.productId)
-                        .includes(productItem._id) && (
-                        <ShoppingProductTile
-                        key={productItem._id}
-                        product={productItem}
-                        handleGetProductDetails={handleGetProductDetails}
-                        handleAddtoCart={handleAddtoCart}
-                        removeFromWishlist={removeFromWishlist}
-                        />
-                    )
-                ))
-              : null}
+            {productList && user?.wishlist?.length > 0 ? (
+              productList.map((productItem) => (
+                (user?.wishlist || []).includes(productItem._id) && (
+                  <div key={productItem._id} className="relative">
+                    <button
+                      onClick={() => removeFromWishlist(productItem._id)}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 z-10"
+                      title="Remove from Wishlist"
+                    >
+                      &times;
+                    </button>
+                    <ShoppingProductTile
+                    handleGetProductDetails={handleGetProductDetails}
+                    product={productItem}
+                    handleAddtoCart={handleAddtoCart}
+                    removeFromWishlist={removeFromWishlist}
+                    wishList={user?.wishlist}
+                  />
+                  </div>
+                )
+            ))) : (
+              <p className="text-center col-span-full">
+                No products in your wishlist.
+              </p>
+            )}
           </div>
         </div>
       </section>

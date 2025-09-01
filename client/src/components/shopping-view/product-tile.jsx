@@ -115,20 +115,16 @@ function addToWishlist(){
           </Button>
         )}
         {
-          (wishList?.find((item) => item._id === product?._id))? (
+          wishList && wishList.includes(product?._id) ? (
             <Button
-              variant="outline"
-              className="w-full mt-2"
               onClick={() => removeFromWishlist(product?._id)}
+              variant="destructive"
+              className="w-full"
             >
               Remove from Wishlist
             </Button>
           ) : (
-            <Button
-              variant="outline"
-              className="w-full mt-2"
-              onClick={() => addToWishlist()}
-            >
+            <Button onClick={addToWishlist} variant="outline" className="w-full">
               Add to Wishlist
             </Button>
           )

@@ -44,15 +44,26 @@ export const fetchWishlistAsync = createAsyncThunk(
 
 export const removeFromWishlistAsync = createAsyncThunk(
     "wishlist/remove",
-    async ({ userId, productId }, { rejectWithValue }) => {
+    async (xxx) => {
+        console.log(xxx, "req in removing wishlist");
         try {
             const response = await axios.delete(
                 `https://mernprojectecw.onrender.com/api/shop/cart/wishlist/`,
-                { userId, productId } 
+                xxx,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    
+                }
             );
-            return response.data;
+            return await response.data;
         } catch (err) {
-            return rejectWithValue(err.response?.data || err.message);
+            console.log(err, "err in removing wishlist");
+            if (err.response?.data?.message) {
+                throw new Error(err.response.data.message);
+            }
+            return err.response?.data || err.message;
         }
     }
 );
