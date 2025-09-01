@@ -18,7 +18,7 @@ const   addToWishlist = async (req, res) => {
     }else{
       user.wishlist.push(product._id);
       await user.save();
-      res.status(200).json({ success: true, message: "Product added to wishlist!" });
+      res.status(200).json({ success: true, data: user.wishlist, message: "Product added to wishlist!" });
     }
 
     
@@ -44,7 +44,7 @@ const removeFromWishlist = async (req, res) => {
     user.wishlist.splice(index, 1);
     await user.save();
 
-    res.status(200).json({ success: true, message: "Product removed from wishlist!" });
+    res.status(200).json({ success: true, data: user.wishlist, message: "Product removed from wishlist!" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -58,7 +58,7 @@ const fetchWishlist = async (req, res) => {
       res.status(404).json({ success: false, message: "User not found!" });
   }
 
-    res.status(200).json({ success: true, wishlist: user.wishlist });
+    res.status(200).json({ success: true, data: user.wishlist });
   } catch (error) {
     console.error("Error fetching wishlist:", error);
     res.status(500).json({ success: false, message: "Server error" });  

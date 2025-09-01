@@ -30,31 +30,16 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
-import { addToWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
+import { addToWishlistAsync, fetchWishlistAsync, removeFromWishlistAsync } from "@/store/shop/wish-slice";
 
-const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
-];
 
-const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
-];
 function Wishlists() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
-  const { items } = useSelector((state) => state.shopWishlist);
-  console.log(items, "wishList");
+  const { wishlist } = useSelector((state) => state.shopWishlist);
+  console.log(wishlist, "wishList");
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -139,7 +124,12 @@ function Wishlists() {
     );
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchWishlistAsync(user?.id));
+}, [dispatch]);
+
   console.log(productList, "productList");
+
 
   useEffect(() => {
     dispatch(getFeatureImages());

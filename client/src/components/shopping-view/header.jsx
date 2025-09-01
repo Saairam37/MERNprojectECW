@@ -26,6 +26,7 @@ import { Label } from "../ui/label";
 import { use } from "react";
 import { fetchWishlistAsync } from "@/store/shop/wish-slice";
 
+
 function MenuItems() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,7 +70,7 @@ function MenuItems() {
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
-  const { items } = useSelector((state) => state.shopWishlist);
+    const { items } = useSelector((state) => state.shopWishlist);
   const [openCartSheet, setOpenCartSheet] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ function HeaderRightContent() {
     dispatch(fetchCartItems(user?.id));
   }, [dispatch]);
 
-  useEffect(() => {
+    useEffect(() => {
     dispatch(fetchWishlistAsync(user?.id));
   }, [dispatch]);
 
