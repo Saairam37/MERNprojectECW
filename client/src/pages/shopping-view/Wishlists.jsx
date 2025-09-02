@@ -38,8 +38,8 @@ function Wishlists() {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
-  const { wishlist } = useSelector((state) => state.shopWishlist);
-  console.log(wishlist, "wishList");
+  const { items } = useSelector((state) => state.shopWishlist);
+  console.log(items, "wishList");
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -145,9 +145,9 @@ function Wishlists() {
             Wishlist Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {productList && user?.wishlist?.length > 0 ? (
+            {productList && items?.length > 0 ? (
               productList.map((productItem) => (
-                (user?.wishlist || []).includes(productItem._id) && (
+                (items || []).includes(productItem._id) && (
                   <div key={productItem._id} className="relative">
                     <button
                       onClick={() => removeFromWishlist(productItem._id)}

@@ -92,7 +92,7 @@ const wishlistSlice = createSlice({
             })
             .addCase(addToWishlistAsync.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.items = action.payload.items;
+                state.items = action.payload.data;
             })
             .addCase(addToWishlistAsync.rejected, (state, action) => {
                 state.isLoading = false;
@@ -106,7 +106,7 @@ const wishlistSlice = createSlice({
             })
             .addCase(fetchWishlistAsync.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.items = action.payload.items;
+                state.items = action.payload.data;
             })
             .addCase(fetchWishlistAsync.rejected, (state, action) => {
                 state.isLoading = false;
@@ -120,7 +120,7 @@ const wishlistSlice = createSlice({
             })
             .addCase(removeFromWishlistAsync.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.items = action.payload.items;
+                state.items = action.payload.data;
             })
             .addCase(removeFromWishlistAsync.rejected, (state, action) => {
                 state.isLoading = false;

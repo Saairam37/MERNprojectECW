@@ -16,6 +16,7 @@ import {
   UmbrellaIcon,
   WashingMachine,
   WatchIcon,
+  Footprints
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -37,7 +38,7 @@ const categoriesWithIcon = [
   { id: "women", label: "Women", icon: CloudLightning },
   { id: "kids", label: "Kids", icon: BabyIcon },
   { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "footwear", label: "Footwear", icon: Footprints },
 ];
 
 const brandsWithIcon = [

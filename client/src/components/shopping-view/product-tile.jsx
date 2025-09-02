@@ -18,6 +18,7 @@ function ShoppingProductTile({
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     const { toast } = useToast();
+    const { items } = useSelector((state) => state.shopWishlist);
 
 function addToWishlist(){
         console.log(product._id, "productId to wishlist");
@@ -115,7 +116,7 @@ function addToWishlist(){
           </Button>
         )}
         {
-          wishList && wishList.includes(product?._id) ? (
+          items && items.includes(product?._id) ? (
             <Button
               onClick={() => removeFromWishlist(product?._id)}
               variant="destructive"
