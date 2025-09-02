@@ -22,7 +22,7 @@ const passwordControllers = {
             console.log("User before save:", user);
 
 
-            const resetLink = `https://mernprojectecw-fe.onrender.com/reset-password/${token}`;
+            const resetLink = `https://e-commerce-website-by-saairam.netlify.app/reset-password/${token}`;
 
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
