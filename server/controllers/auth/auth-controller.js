@@ -4,7 +4,7 @@ const User = require("../../models/User");
 
 //register
 const registerUser = async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { userName, email, password, role } = req.body;
 
   try {
     const checkUser = await User.findOne({ email });
@@ -19,6 +19,7 @@ const registerUser = async (req, res) => {
       userName,
       email,
       password: hashPassword,
+      role
     });
 
     await newUser.save();
@@ -37,7 +38,7 @@ const registerUser = async (req, res) => {
 
 //login
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     const checkUser = await User.findOne({ email });
@@ -45,6 +46,12 @@ const loginUser = async (req, res) => {
       return res.json({
         success: false,
         message: "User doesn't exists! Please register first",
+      });
+
+    if (checkUser.role !== role)
+      return res.json({
+        success: false,
+        message: `You're trying to login as a ${role} but registered as a ${checkUser.role}`,
       });
 
     const checkPasswordMatch = await bcrypt.compare(

@@ -10,6 +10,7 @@ const initialState = {
   userName: "",
   email: "",
   password: "",
+  role: "user",
 };
 
 function AuthRegister() {
@@ -53,13 +54,22 @@ function AuthRegister() {
           </Link>
         </p>
       </div>
-      <CommonForm
+      <div>
+        <div className="font-bold">Select the role you want assign for this account</div>
+        <div className="flex gap-3 mb-4">
+        <label><input type="radio" name="choice" value="user" onChange={()=>setFormData({...formData, role: "user"})}/>Buyer?</label>
+      <label><input type="radio" name="choice" value="admin" onChange={()=>setFormData({...formData, role: "admin"})}/>Seller?</label>
+      
+      </div>
+        <CommonForm
         formControls={registerFormControls}
         buttonText={"Sign Up"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
+      </div>
+      
     </div>
   );
 }

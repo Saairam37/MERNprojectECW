@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const initialState = {
   email: "",
   password: "",
+  role: "user",
 };
 
 function AuthLogin() {
@@ -32,7 +33,7 @@ function AuthLogin() {
       }
     });
   }
-
+  console.log(formData);
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
@@ -49,13 +50,22 @@ function AuthLogin() {
           </Link>
         </p>
       </div>
-      <CommonForm
+      <div>
+        <div className="font-bold">Who are you?</div>
+        <div className="flex gap-3 mb-4">
+        <label><input type="radio" name="choice" value="user" onChange={()=>setFormData({...formData, role: "user"})}/>Buyer?</label>
+      <label><input type="radio" name="choice" value="admin" onChange={()=>setFormData({...formData, role: "admin"})}/>Seller?</label>
+      
+      </div>
+        <CommonForm
         formControls={loginFormControls}
         buttonText={"Sign In"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
+      </div>
+      
     </div>
   );
 }
