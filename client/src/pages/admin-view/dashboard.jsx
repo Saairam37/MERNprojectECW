@@ -57,7 +57,7 @@ function AdminDashboard() {
           : null}
       </div>
     </div>*/
-    <div>Welcome to the Admin panel!!</div>
+    <div>Welcome to the Seller panel!!</div>
   );
 }
 
