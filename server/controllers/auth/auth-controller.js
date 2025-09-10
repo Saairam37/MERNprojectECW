@@ -48,8 +48,7 @@ const loginUser = async (req, res) => {
         message: "User doesn't exists! Please register first",
       });
 
-    if (checkUser.role !== role)
-    {
+    if (checkUser.role !== role){
       if (role === "admin")
         return res.json({
           success: false,
