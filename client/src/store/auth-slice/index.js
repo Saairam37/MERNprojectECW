@@ -28,7 +28,8 @@ export const loginUser = createAsyncThunk(
   "/auth/login",
 
   async (formData) => {
-    const response = await axios.post(
+    try{
+      const response = await axios.post(
       "https://mernprojectecw.onrender.com/api/auth/login",
       formData,
       {
@@ -37,6 +38,12 @@ export const loginUser = createAsyncThunk(
     );
 
     return response.data;
+    }catch(error){
+      return {
+        success: false,
+        message: error.response?.data?.message || "Login failed"
+      } 
+    }
   }
 );
 

@@ -49,10 +49,18 @@ const loginUser = async (req, res) => {
       });
 
     if (checkUser.role !== role)
-      return res.json({
-        success: false,
-        message: `You're trying to login as a ${role} but registered as a ${checkUser.role}`,
-      });
+    {
+      if (role === "admin")
+        return res.json({
+          success: false,
+          message: "You are not an Seller! Please login as a Buyer",
+        });
+      else
+        return res.json({
+          success: false,
+          message: "You are not a Buyer! Please login as an Seller",
+        });
+    }
 
     const checkPasswordMatch = await bcrypt.compare(
       password,
