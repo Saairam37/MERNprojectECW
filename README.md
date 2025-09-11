@@ -1,5 +1,5 @@
 Note for Guvi project reviewer:
-  - to check Admin, email: saairam185@gmail.com and password: Guvi@2025.
+  - to check Seller, email: saairam185@gmail.com and password: Guvi@2025.
   - to check a sample buyer, email: rosk609@gmail.com and password: Guvi@2025.
 
 🛒 E-Commerce Website
