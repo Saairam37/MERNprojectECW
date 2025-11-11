@@ -144,6 +144,3 @@ Please make sure to update documentation/tests as appropriate. Thanks for helpin
 ---
 
 Thanks for checking out MERNprojectECW — happy coding! 🚀
-
-::contentReference[oaicite:1]{index=1}
-```
