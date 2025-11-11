@@ -23,7 +23,7 @@ Highlights include:
   - Frontend: React, optional state-management (Redux, Context API, etc)  
   - Backend: Node.js + Express  
   - Database: MongoDB (with Mongoose)  
-  - Authentication: JWT / OAuth / Passport (whichever you use)  
+  - Authentication: JWT 
 
 ---
 
