@@ -1,4 +1,4 @@
-# ✨ MERNprojectECW  
+# ✨ E-Commerce  
 *A full-stack MERN application for shoppinf and selling for Buyers and Sellers.
 
 ---
