@@ -28,18 +28,16 @@ Highlights include:
 ---
 
 ## 🧰 Built With  
-- **Frontend**: React.js, CSS/SCSS (or Tailwind, Bootstrap, etc)  
+- **Frontend**: React.js, CSS, Tailwind
 - **Backend**: Node.js, Express.js  
 - **Database**: MongoDB (via Mongoose)  
-- **Authentication & Security**: JWT (JSON Web Tokens), bcrypt (or similar)  
-- **Tools & Deployment**: (e.g., Vite, Webpack, Heroku, AWS, Docker)  
-
+- **Authentication & Security**: JWT (JSON Web Tokens), bcrypt
 ---
 
 ## 🔧 Getting Started  
 ### Prerequisites  
 - Node.js (v14+ recommended)  
-- NPM or Yarn  
+- NPM 
 - MongoDB instance (local or via Atlas)  
 - Any required API keys or env variables  
 
@@ -102,8 +100,6 @@ Here’s a summary of the backend’s major endpoints (modify as per your actual
 | POST   | `/api/items`       | Create new item                  | Yes       |
 | PUT    | `/api/items/:id`   | Update existing item             | Yes       |
 | DELETE | `/api/items/:id`   | Delete an item                   | Yes       |
-
-> *(Adapt the above table to reflect your specific routes, entities, and protection levels.)*
 
 ---
 
